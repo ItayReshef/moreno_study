@@ -1,36 +1,26 @@
 import math
-#def is_prime(number: int):
+TARGET_NUMBER = 600851475143
+
+def largest_prime_factor(subject: int)-> int:
+    minimal_possible_answer = round(math.sqrt(subject))
+    for j in reversed(range(minimal_possible_answer)):
+        if (subject % j  == 0 and is_prime(j)):
+            return j
+    return 0
 
 
-subject = 600851475143
-solution = 9
-answer = 0
-is_primal = True
-primal_checker = 0
-while solution < subject:
-    primal_checker = solution - 1
+def is_prime(number: int)-> bool:
+    is_primal = True
+    primal_checker = number - 1
     while primal_checker > 1:
-        if solution % primal_checker == 0:
+        if number % primal_checker == 0:
             is_primal = False
             break
         primal_checker -= 1
     if is_primal:
-        answer = solution
-    is_primal = True
-    solution += 1
-print(answer)
+        return True
+    else:
+        return False
 
 
-
-
-
-#maxval = 1
-#fibonacci = [1, 2]
-#result = 0
-#while fibonacci[len(fibonacci) - 1] < 4000000:
-#    fibonacci.append(fibonacci[maxval-1]+fibonacci[maxval])
-#    maxval = maxval+1
-#for y in fibonacci:
-#    if y%2 == 0:
-#        result += y
-#print(result)
+print(largest_prime_factor(TARGET_NUMBER))
